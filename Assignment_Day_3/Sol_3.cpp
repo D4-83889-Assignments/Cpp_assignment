@@ -143,7 +143,6 @@ int main()
     }
     
     cout<<"ThankYou.."<<endl;
-    s.Delete();
  
     return 0;
 }
