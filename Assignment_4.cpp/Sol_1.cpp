@@ -78,6 +78,11 @@ public:
         name = "n/a";
         address = "n/a";
     }
+    Person(string name, string address)
+    {
+        this->name;
+        this->address;
+    }
 
     void displayPerson()
     {
@@ -107,11 +112,8 @@ public:
     }
     Employee(int id, float salary, string dept, Date d)
     {
-        this->id = id;
-        this->salary = salary;
-        this->dept = dept;
-        this->doj = d;
         accept();
+        Person::accept();
     }
     void setId(int id)
     {
@@ -142,9 +144,9 @@ public:
         cout<<doj.getDay()<<"/"<<doj.getMonth()<<"/"<<doj.getYear()<<endl;
     }
 
-    void setJoiningDate(Date doj)
+    void setJoiningDate()
     {
-        this->doj = doj;
+        this->doj.accept();
     }
 
     void display()
@@ -159,6 +161,7 @@ public:
 
     void accept()
     {
+        cout<<"Enter Date of Joining"<<endl;
         this->doj.accept();
         cout << "Enter salary" << endl;
         cin >> this->salary;
@@ -244,7 +247,7 @@ int main()
             e.getJoiningDate();
             break;
         case 10:
-            e.setJoiningDate(d);
+            e.setJoiningDate();
             break;
         default:
             cout << "Wrong Choice" << endl;
