@@ -3,108 +3,94 @@ using namespace std;
 
 class Product
 {
+private:
     int id;
-    string title;
+
+protected:
     int price;
 
 public:
-    virtual void discount() = 0;
-    virtual int getDiscountedPrice() = 0;
-    int getPrice()
-    {
-        return price;
-    }
-    void setPrice(int i)
-    {
-        price = i;
-    }
+    virtual int calDiscount() = 0;
+    virtual void acceptPrice() = 0;
 };
+
 class Book : public Product
 {
 private:
-    string author;
-    int discountedPrice;
+    string Title;
+    string Author;
 
 public:
-    void discount()
+    int calDiscount()
     {
-        discountedPrice = (1 - 0.1) * getPrice();
+        return ((1 - 0.1) * price);
     }
-    int getDiscountedPrice()
+    void acceptPrice()
     {
-        return discountedPrice;
+        cout << "Enter MRP for the book:" << endl;
+        cin >> this->price;
     }
 };
+
 class Tape : public Product
 {
 private:
-    string artist;
-    int discountedPrice;
+    string Title;
+    string Artist;
 
 public:
-    void discount()
+    int calDiscount()
     {
-        discountedPrice = (1 - 0.05) * getPrice();
+        return ((1 - 0.05) * price);
     }
-    int getDiscountedPrice()
+    void acceptPrice()
     {
-        return discountedPrice;
+        cout << "Enter MRP for the tape:" << endl;
+        cin >> this->price;
     }
 };
 int menu()
 {
     int choice;
-
     cout << "0.Exit" << endl;
     cout << "1.Add a Book" << endl;
-    cout << "2.Add a Tape" << endl;
-    cout << "Enter Your Choice" << endl;
+    cout << "2.Add a tape" << endl;
+    cout << "Enter your choice" << endl;
     cin >> choice;
     return choice;
 }
 int main()
 {
     int choice;
+    Product *arr[3];
     int count = 0;
-    int cost = 0;
-    int price;
-    Product **arr = new Product *[3]();
+    int bill = 0;
     while (count < 3 && (choice = menu()) != 0)
     {
         switch (choice)
         {
         case 1:
-
             arr[count] = new Book();
             break;
-
         case 2:
-
             arr[count] = new Tape();
             break;
 
         default:
-            cout << "Enter Right Option" << endl;
+            cout << "Invalid choice" << endl;
+            break;
         }
         if (arr[count] != NULL)
         {
-            cout << "Enter Price" << endl;
-            cin >> price;
-            arr[count]->setPrice(price);
-            arr[count]->discount();
-            cost += arr[count]->getDiscountedPrice();
+            arr[count]->acceptPrice();
+            bill += arr[count]->calDiscount();
+            delete arr[count];
+            arr[count] = NULL;
             count++;
         }
     }
-    for (int i = 0; i < 3; i++)
-    {
-        /* code */
-        delete arr[i];
-    }
-    delete[] arr;
 
-    cout << "Your bill: " << cost << endl;
+    cout << "Your bill is : Rs." << bill << endl;
 
-    cout << "ThankYou" << endl;
     return 0;
 }
