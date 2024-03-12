@@ -96,6 +96,12 @@ int main()
             count++;
         }
     }
+    for (int i = 0; i < 3; i++)
+    {
+        /* code */
+        delete arr[i];
+    }
+    delete[] arr;
 
     cout << "Your bill: " << cost << endl;
 
