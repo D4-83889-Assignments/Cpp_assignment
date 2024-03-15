@@ -77,6 +77,14 @@ public:
             courseList[i]->display();
         }
     }
+    ~Student(){
+        for (int i = 0; i < courseList.size(); i++)
+        {
+            /* code */
+            delete courseList[i];
+        }
+        
+    }
 };
 
 int menu()
@@ -137,6 +145,10 @@ int main()
     }
 
     cout << "Thanks for using the application." << endl;
-
+    for (int i = 0; i < studentList.size(); i++)
+    {
+        /* code */delete studentList[i];
+    }
+    
     return 0;
 }
